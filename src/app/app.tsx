@@ -1,17 +1,23 @@
 import "@/global.css"
+import { Sun, Moon } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-
-const toggleBackground: () => void = () => {
-    const root: HTMLElement = document.documentElement;
-    const currentTheme: string | null = root.getAttribute("data-theme");
-
-    root.setAttribute("data-theme", currentTheme === "light" ? "dark" : "light");
-}
+import { useState } from "react"
 
 const Page: React.FC = () => {
+    const initialTheme = document.documentElement.getAttribute("data-theme") || "light"
+    const [currentTheme, setCurrentTheme] = useState<string>(initialTheme)
+
+    const toggleBackground: () => void = () => {
+        const newTheme = currentTheme === "light" ? "dark" : "light"
+        document.documentElement.setAttribute("data-theme", newTheme)
+        setCurrentTheme(newTheme)
+    }
+
     return (
         <main className={`w-screen h-screen flex flex-col justify-center items-center`}>
-            <Button onClick={toggleBackground}>Click</Button>
+            <Button variant={`outline`} size={`icon`} onClick={toggleBackground}>
+                {currentTheme === "light" ? <Sun className={`bg-transparent text-[32px]`} />:<Moon className={`bg-transparent text-[32px]`} />}
+            </Button>
         </main>
     )
 }
