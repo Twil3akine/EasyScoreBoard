@@ -2,7 +2,7 @@ import { Sun, Moon } from 'lucide-react'
 import { Switch } from "@/components/ui/switch"
 import { ThemeProps } from "@/props"
 
-const ChangeTheme: React.FC<ThemeProps> = ({ Theme }) => {
+const ChangeTheme = ({ Theme }: ThemeProps) => {
   return (
     <div className={`flex space-x-3`}>
       <Sun className={`bg-transparent`} />

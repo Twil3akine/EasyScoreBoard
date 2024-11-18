@@ -22,3 +22,7 @@ git commit -m "$1"
 echo
 echo "===  git push ==="
 git push origin "$2"
+
+echo
+echo "===  git log ==="
+git log --graph --all > log

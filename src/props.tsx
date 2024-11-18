@@ -1,4 +1,4 @@
-export type Theme = {
+    export type Theme = {
     currentTheme: "light" | "dark"
     toggleTheme: () => void
 }
