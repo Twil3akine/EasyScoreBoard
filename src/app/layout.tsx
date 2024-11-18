@@ -1,19 +1,23 @@
 import "@/global.css"
 import React, { useState } from "react"
 import Page from "@/app/app"
+import { Theme } from "@/props"
 
 const Layout: React.FC = () => {
-  const [currentTheme, setCurrentTheme] = useState<"light" | "dark">("light")
-
-  const toggleTheme: () => void = () => {
-    const newTheme: "light"|"dark" = currentTheme==="light" ? "dark":"light"
-    document.documentElement.setAttribute("data-theme", newTheme)
-    setCurrentTheme(newTheme)
-  }
+  const [theme, setTheme] = useState<Theme>({
+    currentTheme: "light",
+    toggleTheme: () => {
+      setTheme((prevTheme) => {
+        const newTheme = prevTheme.currentTheme === "light" ? "dark" : "light"
+        document.documentElement.setAttribute("data-theme", newTheme)
+        return { ...prevTheme, currentTheme: newTheme }
+      })
+    }
+  })
 
   return (
     <div>
-      <Page currentTheme={currentTheme} toggleTheme={toggleTheme} />
+      <Page Theme={theme} />
     </div>
   )
 }
